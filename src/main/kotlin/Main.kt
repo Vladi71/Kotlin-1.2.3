@@ -13,13 +13,15 @@ fun main() {
 
     val resultMinDiscount = purchase * minDiscount
     val resultMaxDiscount = purchase * maxDiscount
+    val minD = purchase - resultMinDiscount
+    val maxD = purchase  - resultMaxDiscount
 
     val result: Double = if (musicLover && total in minPriceStartDiscount until maxPriceStartDiscount)
-        purchase - resultMinDiscount - ((purchase - resultMinDiscount) * musicLoverDiscount)
+        minD - (minD * musicLoverDiscount)
     else (if (musicLover && total >= maxPriceStartDiscount)
-        purchase  - resultMaxDiscount - ((purchase - resultMinDiscount) * musicLoverDiscount)
-    else if (total in minPriceStartDiscount until maxPriceStartDiscount) purchase - resultMinDiscount
-    else if (total >= maxPriceStartDiscount) purchase - resultMaxDiscount
+        maxD - (maxD * musicLoverDiscount)
+    else if (total in minPriceStartDiscount until maxPriceStartDiscount) minD
+    else if (total >= maxPriceStartDiscount) maxD
     else purchase) as Double
 
     println("Спасибо за покупку! Сумма с учетом скидки составила $result руб.")
